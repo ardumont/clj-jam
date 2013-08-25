@@ -16,7 +16,8 @@
   {:method :post
    :uri    (format "/v1/users/login?name=%s&password=%s" user pass)})
 
-;; (q/execute (token "username" "yourpass"))
+;; (q/execute (token "ardumont" "christelle"))
+{:message "Logged in as \"ardumont\"", :name "ardumont", :token ""}
 ;; {:message "Logged in as \"username\"", :name "username", :token "some-token"}
 
 (defn package "Retrieve the information about the package"
@@ -85,10 +86,22 @@
 ;;            :created 1373560695}}
 
 (defn release-package "Release a package to marmalade"
-  [user token file]
-  (q/api :post "/v1/packages" {:form-params
-                               {:name user
-                                :token token
-                                :package (clojure.java.io/file file)}}))
+  [name token file]
+  {:method :post
+   :uri    (format "/v1/packages?name=%s" name)
+;;   :content-type "multiform/form-data"
+   :multipart [;; {:name "Content/type" :content "application/tar"}
+               {:name "name"    :content name}
+               {:name "token"   :content token}
+               {:name "package" :content (clojure.java.io/file file)
+                ;; :mime-type "application/tar"
+                ;; :encoding "UTF-8"
+                }]})
 
-(release-package "ardumont" q/marmalade-creds "~/repo/perso/org-trello/org-trello-0.1.5.tar")
+;; (release-package "org-trello" "some-token" "some-file")
+
+(comment
+  (-> (release-package "ardumont" q/marmalade-creds "/home/tony/repo/perso/org-trello/org-trello-0.1.5.tar")
+      q/execute)
+
+  )
