@@ -72,3 +72,12 @@
 ;;                        :commentary nil
 ;;                        :created 1377439387}]
 ;;            :created 1373560695}}
+
+(defn release-package "Release a package to marmalade"
+  [user token file]
+  (q/api :post "/v1/packages" {:form-params
+                               {:name user
+                                :token token
+                                :package (clojure.java.io/file file)}}))
+
+(release-package "ardumont" q/marmalade-creds "~/repo/perso/org-trello/org-trello-0.1.5.tar")
