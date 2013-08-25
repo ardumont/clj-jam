@@ -3,20 +3,31 @@
   (:require [clj-jam.query  :as q]
             [clojure.string :as s]))
 
-(q/api :get "/v1/users/ardumont")
-;;{:message "Got ardumont", :user {:name "ardumont", :packages ["org-trello"], :created 1372878705}}
+(defn user "Retrieve user"
+  [name]
+  {:method :get
+   :uri    (format "/v1/users/%s" name)})
 
-(defn retrieve-token [user pass]
-  (q/api :post (format "/v1/users/login?name=%s&password=%s" user pass)))
+;; (q/execute (user "ardumont"))
+;; {:message "Got ardumont", :user {:name "ardumont", :packages ["org-trello"], :created 1372878705}}
 
-;; (api :post "/v1/users/login?name=username&password=yourpass")
+(defn token "Retrieve token"
+  [user pass]
+  {:method :post
+   :uri    (format "/v1/users/login?name=%s&password=%s" user pass)})
+
+;; (q/execute (token "username" "yourpass"))
 ;; {:message "Logged in as \"username\"", :name "username", :token "some-token"}
 
-;; to retrieve the token, you are forced to use the api
-;; (retrieve-token "username" "yourpass")
-;; {:message "Logged in as \"username\"", :name "username", :token "some-token"}
+(defn package "Retrieve the information about the package"
+  ([pack]
+     {:method :get
+      :uri (format "/v1/packages/%s" pack)})
+  ([pack version]
+     (-> (package pack)
+         (update-in [:uri] (fn [o n] (format "%s/%s" o n)) version))))
 
-(q/api :get "/v1/packages/org-trello/0.1.5")
+;; (q/execute (package "org-trello" "0.1.5"))
 
 ;; {:message "Got org-trello
 ;;  version 0.1.5"
@@ -46,7 +57,7 @@
 ;;            :created 1373560695}}
 
 
-(q/api :get "/v1/packages/org-trello/latest")
+;; (q/execute (package "org-trello" "latest"))
 
 ;; {:message "Got org-trello"
 ;;  :package {:downloads 109
