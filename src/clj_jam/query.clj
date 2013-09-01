@@ -76,25 +76,20 @@
         :multipart [{:name "Content/type" :content "application/tar"}
                     {:name "name" :content "org-trello"}
                     {:name "token" :content marmalade-creds}
-                    {:name "package" :content (clojure.java.io/file "/home/tony/repo/perso/org-trello/org-trello-0.1.5.tar")}]}))
+                    {:name "package" :content (clojure.java.io/file "/home/tony/repo/perso/org-trello/org-trello-0.1.5.tar")}]})
 
-;; curl -v -F "name=ardumont"
-;;         -F "token=my-token"
-;;         -F "package=@org-trello-0.1.5.tar"
-;; http://www.marmalade-repo.org/v1/packages
-
-(c/post (compute-url URL "/v1/packages")
-        {
-         :headers {"Content-Disposition" "multiform/form-data"}
-         ;;:content-type "multiform/form-data"
-         :debug true
-;;         :accept :json
-;;         :as :json
-         :response-interceptor (fn [resp ctx] (println ctx))
-         :multipart [{:name "name"    :content "ardumont"}
-                     {:name "token"   :content marmalade-creds}
-                     {:name "package" :content (slurp (clojure.java.io/file "/home/tony/repo/perso/org-trello/org-trello-dummy.el"))
-;;                      :mime-type "text/plain" :encoding "utf-8"
-                      }
-           ;;          {:name "Content/type" :content "text/plain" }
-                     ]})
+  (c/post (compute-url URL "/v1/packages")
+          {
+           :headers {"Content-Disposition" "multiform/form-data"}
+           ;;:content-type "multiform/form-data"
+           :debug true
+           ;;         :accept :json
+           ;;         :as :json
+           :response-interceptor (fn [resp ctx] (println ctx))
+           :multipart [{:name "name"    :content "ardumont"}
+                       {:name "token"   :content marmalade-creds}
+                       {:name "package" :content (slurp (clojure.java.io/file "/home/tony/repo/perso/org-trello/org-trello-dummy.el"))
+                        ;;                      :mime-type "text/plain" :encoding "utf-8"
+                        }
+                       ;;          {:name "Content/type" :content "text/plain" }
+                       ]}))
