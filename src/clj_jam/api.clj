@@ -16,8 +16,10 @@
   {:method :post
    :uri    (format "/v1/users/login?name=%s&password=%s" user pass)})
 
-;; (q/execute (token "ardumont" "some-pass"))
-{:message "Logged in as \"ardumont\"", :name "ardumont", :token ""}
+;; (-> (token "ardumont" "some-pass")
+;;     q/execute)
+
+;; {:message "Logged in as \"ardumont\"", :name "ardumont", :token ""}
 ;; {:message "Logged in as \"username\"", :name "username", :token "some-token"}
 
 (defn package "Retrieve the information about the package"
