@@ -16,7 +16,7 @@
   {:method :post
    :uri    (format "/v1/users/login?name=%s&password=%s" user pass)})
 
-;; (q/execute (token "ardumont" "christelle"))
+;; (q/execute (token "ardumont" "some-pass"))
 {:message "Logged in as \"ardumont\"", :name "ardumont", :token ""}
 ;; {:message "Logged in as \"username\"", :name "username", :token "some-token"}
 
@@ -27,6 +27,9 @@
   ([pack version]
      (-> (package pack)
          (update-in [:uri] (fn [o n] (format "%s/%s" o n)) version))))
+
+;; (-> (package "dash" "0.2.1")
+;;     q/execute)
 
 ;; (q/execute (package "org-trello" "0.1.5"))
 
