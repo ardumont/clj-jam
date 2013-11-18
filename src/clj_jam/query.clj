@@ -6,6 +6,7 @@
 ;; your credentials in the ~/.marmalade/config.clj file
 ;; (def marmalade-creds "your-token")
 
+(def marmalade-creds nil)
 ;; load consumer-key, consumer-secret-key and access-token that does give access to everything forever (boum)
 (load-file (str (System/getProperty "user.home") "/.marmalade/config.clj"))
 
