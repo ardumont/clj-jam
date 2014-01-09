@@ -99,9 +99,10 @@
 
 (use '(incanter core stats charts))
 
-(defn barchart-by-versions [versions] ""
-  (let [versions (map (comp #(clojure.string/replace % "." "") first) actual-result)
-        values   (map second actual-result)]
+(defn barchart-by-versions [versions-values-map] "Given a map of versions, compute its equivalent barchart."
+  (let [extract-values (comp #(clojure.string/replace % "." "") first)
+        versions       (map extract-values versions-values-map)
+        values         (map second versions-values-map)]
     (view (bar-chart versions values))))
 
 (barchart-by-versions actual-result)
