@@ -2,8 +2,7 @@
   "Chart the package's download rate from the marmalade api result."
   (:use [incanter core stats charts])
   (:require [clj-jam.api :as a]
-            [clojure.string :as s]
-            []))
+            [clojure.string :as s]))
 
 (def versions ^{:doc "List of current org-trello versions. FIXME: Need to fetch this from marmalade."}
   (for [medium (range 0 3)
@@ -48,4 +47,4 @@
                                 versions-values-map)]
     (view (bar-chart (first versions-values) (second versions-values)))))
 
-(barchart-by-versions2 actual-result)
+(barchart-by-versions actual-result)
