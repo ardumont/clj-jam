@@ -61,7 +61,3 @@
   (reduce (fn [m pack-version] (assoc m ((comp #(clojure.string/join "" %) :version) pack-version) (:downloads pack-version)))
           (sorted-map)
           (get-in versions [:package :versions])))
-
-(-> "org-trello"
-    versions
-    downloads-by-version)
