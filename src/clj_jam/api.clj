@@ -1,5 +1,5 @@
 (ns clj-jam.api
-  "Query the marmalade api (the basic authentication scheme is implemented here)"
+  "Marmalade API abstraction."
   (:require [clj-jam.query  :as q]
             [clojure.string :as s]))
 
