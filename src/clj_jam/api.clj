@@ -52,7 +52,7 @@
 ;;                                      :description "Org minor mode to synchronize with trello"}],
 ;;                          :created 1373560695}})
 
-(defn download-by-version [versions] "Given a list of versions, compute the download ratio per versions"
+(defn downloads-by-version [versions] "Given a list of versions, compute the download ratio per versions"
   (->> versions
        (reduce (fn [map version]
                  (let [info-version (-> "org-trello"
@@ -61,4 +61,4 @@
                    (assoc map version (get-in info-version [:package :versions 0 :downloads] 0))))
                (sorted-map))))
 
-;; (download-by-version versions)
+;; (downloads-by-version versions)
