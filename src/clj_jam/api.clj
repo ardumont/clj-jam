@@ -58,6 +58,6 @@
       q/execute))
 
 (defn downloads-by-version [versions] "Given a list of metadata versions (including version and downloads), compute the download ratio per versions."
-  (reduce (fn [m pack-version] (assoc m ((comp #(clojure.string/join "" %) :version) pack-version) (:downloads pack-version)))
+  (reduce (fn [m pack-version] (assoc m ((comp #(clojure.string/join "" %) :version) pack-version) (get pack-version :downloads 0)))
           (sorted-map)
           (get-in versions [:package :versions])))
