@@ -1,5 +1,4 @@
 (ns clj-jam.web
-  (:use [incanter core stats charts])
   (:require [compojure.core :refer [defroutes GET PUT POST DELETE ANY]]
             [compojure.handler :refer [site]]
             [compojure.route :as route]
@@ -12,9 +11,7 @@
             [cemerick.drawbridge :as drawbridge]
             [environ.core :refer [env]]
             [clj-jam.api :as a]
-            [clj-jam.chart :as c])
-  (:import [java.io ByteArrayOutputStream]
-           [java.io ByteArrayInputStream]))
+            [clj-jam.chart :as c]))
 
 (defn- authenticated? [user pass]
   ;; TODO: heroku config:add REPL_USER=[...] REPL_PASSWORD=[...]
@@ -26,13 +23,9 @@
       (basic/wrap-basic-authentication authenticated?)))
 
 (defn gen-chart-png [chart] "Given a chart, compute the png equivalent."
-  (let [out-stream (ByteArrayOutputStream.)
-        in-stream  (do
-                     (save chart out-stream)
-                     (ByteArrayInputStream. (.toByteArray out-stream)))]
-    {:status 200
-     :headers {"Content-Type" "image/png"}
-     :body in-stream}))
+  {:status 200
+   :headers {"Content-Type" "image/png"}
+   :body (c/gen-chart-png-outputstream chart)})
 
 (defroutes app
   (ANY "/repl" {:as req}
