@@ -1,5 +1,4 @@
-(ns clj-jam.chart
-  "Chart the package's download rate from the marmalade api result."
+(ns clj-jam.chart "Chart the package's download rate from the marmalade api result."
   (:use [incanter core stats charts])
   (:require [clj-jam.api :as a]
             [clojure.string :as s]))
