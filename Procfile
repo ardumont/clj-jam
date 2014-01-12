@@ -1,1 +1,1 @@
-web: lein with-profile production trampoline run -m clj_jam.web
+web: lein with-profile production trampoline run -m clj-jam.web
