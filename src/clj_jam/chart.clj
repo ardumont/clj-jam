@@ -50,6 +50,10 @@
                                                          "027" 2
                                                          "028" 19}))
 
+  (def barchart-by-versions-without-computations-val (barchart-by-versions versions-without-computations))
+  (view barchart-by-versions-without-computations-val)
 
-  (-> versions-without-computations barchart-by-versions view)
-  (-> versions barchart-by-versions view))
+  (def barchart-by-versions-val (barchart-by-versions versions))
+  (view barchart-by-versions-val)
+
+  (save barchart-by-versions-val "/tmp/barchart-by-version.png"))
