@@ -1,14 +1,15 @@
 (ns clj-jam.query
   "Query the marmalade api (the basic authentication scheme is implemented here)"
   (:require [clj-http.client :as c]
-            [clojure.string  :as s]))
+            [clojure.string  :as s]
+            [clojure.java.io :as io]))
 
 ;; your credentials in the ~/.marmalade/config.clj file
 ;; (def marmalade-creds "your-token")
 
-(def marmalade-creds nil)
-;; load consumer-key, consumer-secret-key and access-token that does give access to everything forever (boum)
-(load-file (str (System/getProperty "user.home") "/.marmalade/config.clj"))
+(def marmalade-creds-file (format "%s/.marmalade/config.clj" (System/getProperty "user.home")))
+
+(when (.exists (io/file marmalade-creds-file)) (load-file marmalade-creds-file))
 
 (def URL "The needed prefix url for marmalade" "http://www.marmalade-repo.org")
 
