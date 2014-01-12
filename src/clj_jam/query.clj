@@ -9,7 +9,9 @@
 
 (def marmalade-creds-file (format "%s/.marmalade/config.clj" (System/getProperty "user.home")))
 
-(when (.exists (io/file marmalade-creds-file)) (load-file marmalade-creds-file))
+(if (.exists (io/file marmalade-creds-file))
+  (load-file marmalade-creds-file)
+  (def marmalade-creds nil))
 
 (def URL "The needed prefix url for marmalade" "http://www.marmalade-repo.org")
 
