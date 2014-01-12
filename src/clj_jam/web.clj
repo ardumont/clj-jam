@@ -1,8 +1,9 @@
-(ns clj-jam.web
+(ns clj-jam.web "A simple api to compute an emacs-lisp package's downloads-by-versions chart on marmalage repository"
   (:require [compojure.core :refer [defroutes GET PUT POST DELETE ANY]]
             [compojure.handler :refer [site]]
             [compojure.route :as route]
             [clojure.java.io :as io]
+            [ring.util.response :as resp]
             [ring.middleware.stacktrace :as trace]
             [ring.middleware.session :as session]
             [ring.middleware.session.cookie :as cookie]
@@ -22,33 +23,33 @@
       (session/wrap-session)
       (basic/wrap-basic-authentication authenticated?)))
 
-(defn gen-chart-png [chart] "Given a chart, compute the png equivalent."
-  {:status 200
-   :headers {"Content-Type" "image/png"}
-   :body (c/gen-chart-png-outputstream chart)})
+(defn response [content-type body] "Generic get response"
+  (-> (resp/response body)
+      (resp/content-type content-type)))
 
 (defroutes app
   (ANY "/repl" {:as req}
        (drawbridge req))
+
   (GET "/packages/:pack" [pack]
-       {:status 200
-        :headers {"Content-Type" "text/plain"}
-        :body (-> pack
-                  a/versions
-                  a/downloads-by-version
-                  pr-str)})
+       (->> pack
+            a/versions
+            a/downloads-by-version
+            pr-str
+            (response "text/plain")))
 
   (GET "/chart/:pack" [pack :as req]
-       (-> pack
-           a/versions
-           a/downloads-by-version
-           c/barchart-by-versions
-           gen-chart-png))
+       (->> pack
+            a/versions
+            a/downloads-by-version
+            c/barchart-by-versions
+            c/gen-chart-png-outputstream
+            (response "image/png")))
 
   (GET "/" []
-       {:status 200
-        :headers {"Content-Type" "text/plain"}
-        :body "Compute download by version chart for a given emacs-lisp package on marmalade."})
+       (->> "Compute download by version chart for a given emacs-lisp package on marmalade."
+            (response "text/plain")))
+
   (ANY "*" []
        (route/not-found (slurp (io/resource "404.html")))))
 
