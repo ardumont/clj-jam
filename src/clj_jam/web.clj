@@ -38,7 +38,7 @@
             pr-str
             (response "text/plain")))
 
-  (GET "/chart/:pack" [pack :as req]
+  (GET "/charts/:pack" [pack :as req]
        (->> pack
             a/versions
             a/downloads-by-version
