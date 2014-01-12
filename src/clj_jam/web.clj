@@ -9,7 +9,8 @@
             [ring.adapter.jetty :as jetty]
             [ring.middleware.basic-authentication :as basic]
             [cemerick.drawbridge :as drawbridge]
-            [environ.core :refer [env]]))
+            [environ.core :refer [env]]
+            [clj-jam.api :as a]))
 
 (defn- authenticated? [user pass]
   ;; TODO: heroku config:add REPL_USER=[...] REPL_PASSWORD=[...]
@@ -23,6 +24,13 @@
 (defroutes app
   (ANY "/repl" {:as req}
        (drawbridge req))
+  (GET "/packages/:pack" [pack]
+       {:status 200
+        :headers {"Content-Type" "text/plain"}
+        :body (-> pack
+                  a/versions
+                  a/downloads-by-version
+                  pr-str)})
   (GET "/" []
        {:status 200
         :headers {"Content-Type" "text/plain"}
