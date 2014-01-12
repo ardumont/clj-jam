@@ -1,4 +1,5 @@
 (ns clj-jam.web
+  (:use [incanter core stats charts])
   (:require [compojure.core :refer [defroutes GET PUT POST DELETE ANY]]
             [compojure.handler :refer [site]]
             [compojure.route :as route]
@@ -10,7 +11,10 @@
             [ring.middleware.basic-authentication :as basic]
             [cemerick.drawbridge :as drawbridge]
             [environ.core :refer [env]]
-            [clj-jam.api :as a]))
+            [clj-jam.api :as a]
+            [clj-jam.chart :as c])
+  (:import [java.io ByteArrayOutputStream]
+           [java.io ByteArrayInputStream]))
 
 (defn- authenticated? [user pass]
   ;; TODO: heroku config:add REPL_USER=[...] REPL_PASSWORD=[...]
@@ -20,6 +24,15 @@
   (-> (drawbridge/ring-handler)
       (session/wrap-session)
       (basic/wrap-basic-authentication authenticated?)))
+
+(defn gen-chart-png [chart] "Given a chart, compute the png equivalent."
+  (let [out-stream (ByteArrayOutputStream.)
+        in-stream  (do
+                     (save chart out-stream)
+                     (ByteArrayInputStream. (.toByteArray out-stream)))]
+    {:status 200
+     :headers {"Content-Type" "image/png"}
+     :body in-stream}))
 
 (defroutes app
   (ANY "/repl" {:as req}
@@ -31,10 +44,18 @@
                   a/versions
                   a/downloads-by-version
                   pr-str)})
+
+  (GET "/chart/:pack" [pack :as req]
+       (-> pack
+           a/versions
+           a/downloads-by-version
+           c/barchart-by-versions
+           gen-chart-png))
+
   (GET "/" []
        {:status 200
         :headers {"Content-Type" "text/plain"}
-        :body (pr-str ["clj-jam Hello" :from 'Heroku])})
+        :body "Compute download by version chart for a given emacs-lisp package on marmalade."})
   (ANY "*" []
        (route/not-found (slurp (io/resource "404.html")))))
 
