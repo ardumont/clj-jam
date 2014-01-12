@@ -4,7 +4,7 @@
   (:require [clj-jam.api :as a]
             [clojure.string :as s]))
 
-(def versions ^{:doc "List of current org-trello versions. FIXME: Need to fetch this from marmalade."}
+(def versions ^{:doc "List of current org-trello versions."}
   (-> "org-trello"
       a/versions
       a/downloads-by-version))
