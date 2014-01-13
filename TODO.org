@@ -1,0 +1,10 @@
+#+TITLE: clj-jam organization
+#+AUTHOR: ardumont
+
+- [X] Implements basic authentication
+- [X] Retrieve package informations
+- [X] Compute some aggregation regarding emacs-lisp package's download ratio
+- [X] Graph it
+- [X] Make a webapp
+- [X] Deploy to heroku
+- [X] Plug CI to travis-ci
