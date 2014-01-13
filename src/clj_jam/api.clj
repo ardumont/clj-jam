@@ -52,12 +52,16 @@
 ;;                                      :description "Org minor mode to synchronize with trello"}],
 ;;                          :created 1373560695}})
 
+(defn -versions [package-meta] "Given a package meta, retrieve the versions"
+  (get-in package-meta [:package :versions]))
+
 (defn versions [package-name] "Given a package, extract all its versions information."
   (-> package-name
       package
-      q/execute))
+      q/execute
+      -versions))
 
 (defn downloads-by-version [versions] "Given a list of metadata versions (including version and downloads), compute the download ratio per versions."
   (reduce (fn [m pack-version] (assoc m ((comp #(clojure.string/join "" %) :version) pack-version) (get pack-version :downloads 0)))
           (sorted-map)
-          (get-in versions [:package :versions])))
+          versions))
