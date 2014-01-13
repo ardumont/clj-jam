@@ -25,5 +25,5 @@ logs:
 remote-repl:
 	heroku run lein repl
 
-test:
-	lein test
+tests:
+	lein expectations
