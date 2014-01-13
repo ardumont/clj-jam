@@ -12,7 +12,8 @@
                  [ring/ring-devel "1.2.1"]
                  [ring-basic-authentication "1.0.3"]
                  [environ "0.4.0"]
-                 [com.cemerick/drawbridge "0.0.6"]]
+                 [com.cemerick/drawbridge "0.0.6"]
+                 [expectations "1.4.53"]]
   :min-lein-version "2.0.0"
   :plugins [[environ/environ.lein "0.2.1"]
             [lein-expectations    "0.0.7"]]
