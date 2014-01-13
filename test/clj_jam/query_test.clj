@@ -1,4 +1,4 @@
-(ns clj-jam.test.query-test
+(ns clj-jam.query-test
   (:use [clj-jam.query]
         [expectations]))
 

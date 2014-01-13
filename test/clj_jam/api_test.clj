@@ -1,4 +1,4 @@
-(ns clj-jam.test.api-test
+(ns clj-jam.api-test
   (:use [clj-jam.api]
         [expectations]))
 
