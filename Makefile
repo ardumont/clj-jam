@@ -26,4 +26,4 @@ remote-repl:
 	heroku run lein repl
 
 tests:
-	lein expectations
+	lein test
