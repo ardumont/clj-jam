@@ -1,4 +1,4 @@
-# clj-jam
+# clj-jam [![Build Status](https://travis-ci.org/ardumont/clj-jam.png?branch=master)](https://travis-ci.org/ardumont/clj-jam)
 
 [Marmalade](http://marmalade-repo.org/) API hacking.
 
