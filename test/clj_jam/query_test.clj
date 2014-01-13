@@ -16,5 +16,5 @@
 (expect [:post :multipart] (dispatch-execute {:method :post :multipart true}))
 (expect [:put :multipart]  (dispatch-execute {:method :put :multipart true}))
 (expect [:get nil]         (dispatch-execute {:method :get}))
-(expect [:post nil]        (dispatch-execute {:method :get}))
-(expect [:put nil]         (dispatch-execute {:method :get}))
+(expect [:post nil]        (dispatch-execute {:method :post}))
+(expect [:put nil]         (dispatch-execute {:method :put}))
