@@ -48,7 +48,7 @@
             (response "image/png")))
 
   (GET "/" []
-       (->> (p/index-page)
+       (->> (p/home-page)
             (response "text/html")))
 
   (ANY "*" []
