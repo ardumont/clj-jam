@@ -22,6 +22,9 @@ scale:
 logs:
 	heroku logs
 
+apps:
+	heroku apps
+
 remote-repl:
 	heroku run lein repl
 
