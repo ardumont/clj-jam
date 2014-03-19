@@ -12,6 +12,12 @@ run-dev:
 deploy:
 	git push heroku master
 
+install-heroku:
+	git remote add heroku git@heroku.com:infinite-citadel-3625.git
+
+login:
+	heroku login
+
 ps:
 	heroku ps --app $(APP)
 
