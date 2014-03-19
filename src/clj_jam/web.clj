@@ -47,7 +47,7 @@
             (response "image/png")))
 
   (GET "/" []
-       (->> "Compute download by version chart for a given emacs-lisp package on marmalade."
+       (->> "Compute download by version chart for a given emacs-lisp package on marmalade.\n\n  /charts/package-name to draw the download chart (for example /charts/org-trello)\n\n  /packages/package-name to access a key-value map of download per version (for example /packages/org-trello)"
             (response "text/plain")))
 
   (ANY "*" []
