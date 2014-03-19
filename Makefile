@@ -1,7 +1,7 @@
 APP=infinite-citadel-3625
 
 pull:
-	git pull --rebase --prune origin master
+	git fetch --prune && git rebase origin/master
 
 push:
 	git push origin master
