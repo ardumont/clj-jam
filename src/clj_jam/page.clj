@@ -1,11 +1,16 @@
 (ns clj-jam.page "Reference page content we want to display"
     (:use [hiccup core page]))
 
+(defn- header [title]
+  "A simple html header where you can override the title"
+  [:head
+      [:title title]
+      (include-css "/css/style.css")])
+
 (defn index-page []
+  "The home page"
   (html5
-    [:head
-      [:title "clj-jam"]
-      (include-css "/css/style.css")]
+    (header "clj-jam - chart your emacs package's downloads by version")
     [:body
       [:p "Compute downloads by version for a given emacs package. You can chart or simply display result."]
       [:ul
