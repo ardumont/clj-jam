@@ -51,7 +51,10 @@
             (response "text/plain")))
 
   (ANY "*" []
-       (route/not-found (slurp (io/resource "404.html")))))
+       (->> "404.html"
+            io/resource
+            slurp
+            route/not-found)))
 
 (defn wrap-error-page [handler]
   (fn [req]
