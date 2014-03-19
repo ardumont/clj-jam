@@ -3,7 +3,7 @@
   :url "http://infinite-citadel-3625.herokuapp.com/"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[clj-http            "0.7.8"]
+  :dependencies [[clj-http            "0.9.1"]
                  [org.clojure/clojure "1.5.1"]
                  [incanter            "1.5.4"]
                  [compojure "1.1.6"]
