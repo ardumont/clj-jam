@@ -12,7 +12,8 @@
             [cemerick.drawbridge :as drawbridge]
             [environ.core :refer [env]]
             [clj-jam.api :as a]
-            [clj-jam.chart :as c]))
+            [clj-jam.chart :as c]
+            [clj-jam.page :as p]))
 
 (defn- authenticated? [user pass]
   ;; TODO: heroku config:add REPL_USER=[...] REPL_PASSWORD=[...]
@@ -47,8 +48,8 @@
             (response "image/png")))
 
   (GET "/" []
-       (->> "Compute download by version chart for a given emacs-lisp package on marmalade.\n\n  /charts/package-name to draw the download chart (for example /charts/org-trello)\n\n  /packages/package-name to access a key-value map of download per version (for example /packages/org-trello)"
-            (response "text/plain")))
+       (->> (p/index-page)
+            (response "text/html")))
 
   (ANY "*" []
        (->> "404.html"
