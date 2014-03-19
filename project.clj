@@ -6,7 +6,6 @@
   :dependencies [[clj-http            "0.7.8"]
                  [org.clojure/clojure "1.5.1"]
                  [incanter            "1.5.4"]
-                 [org.clojure/core.async "0.1.267.0-0d7780-alpha"]
                  [compojure "1.1.6"]
                  [ring/ring-jetty-adapter "1.2.1"]
                  [ring/ring-devel "1.2.1"]
