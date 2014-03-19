@@ -1,3 +1,5 @@
+APP=infinite-citadel-3625
+
 pull:
 	git pull --rebase --prune origin master
 
@@ -11,16 +13,16 @@ deploy:
 	git push heroku master
 
 ps:
-	heroku ps
+	heroku ps --app $(APP)
 
 open:
-	heroku open
+	heroku open --app $(APP)
 
 scale:
-	heroku ps:scale web=1
+	heroku ps:scale web=1 --app $(APP)
 
 logs:
-	heroku logs
+	heroku logs --app $(APP)
 
 apps:
 	heroku apps
