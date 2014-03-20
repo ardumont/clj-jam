@@ -44,7 +44,7 @@
             a/versions
             a/downloads-per-version
             c/barchart-by-versions
-            c/gen-chart-png-outputstream
+            c/gen-chart-png-outputstream!
             (response "image/png")))
 
   (GET "/" []

@@ -5,13 +5,14 @@
   (:import [java.io ByteArrayOutputStream]
            [java.io ByteArrayInputStream]))
 
+
 (defn barchart-by-versions [versions-values-map] "Given a map of versions, compute its equivalent barchart."
   (bar-chart (map first versions-values-map) (map second versions-values-map)
                    :title "Downloads per Versions"
                    :x-label "Versions"
                    :y-label "Downloads"))
 
-(defn gen-chart-png-outputstream [chart] "Given a chart, compute the png stream equivalent."
+(defn gen-chart-png-outputstream! [chart] "Given a chart, compute the png stream equivalent."
   (let [out-stream (ByteArrayOutputStream.)]
     (save chart out-stream)
     (ByteArrayInputStream. (.toByteArray out-stream))))
