@@ -21,7 +21,7 @@
      (-> (package pack)
          (update-in [:uri] (fn [o n] (format "%s/%s" o n)) version))))
 
-(defn- -versions [package-meta] "Given a package meta, retrieve the versions"
+(defn -versions [package-meta] "Given a package meta, retrieve the versions"
   (get-in package-meta [:package :versions]))
 
 (defn versions [package-name] "Given a package, extract all its versions information."
