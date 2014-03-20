@@ -74,7 +74,7 @@
 (defmethod execute [:post nil]        [{:keys [uri params]}]
   (api :post uri params))
 
-(defmethod execute [:post :multipart] [{:keys [uri multipart] :as req}]
+(defmethod execute [:post :multipart] [{:keys [uri] :as req}]
   (api :post uri (-> req
                      (dissoc :uri)
                      (dissoc :params))))
