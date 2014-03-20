@@ -67,11 +67,18 @@
   [method (if multipart :multipart nil)])
 
 (defmulti  execute dispatch-execute)
-(defmethod execute [:get nil]         [{:keys [uri params]}]    (api :get uri params))
-(defmethod execute [:post nil]        [{:keys [uri params]}]    (api :post uri params))
-(defmethod execute [:post :multipart] [{:keys [uri multipart] :as req}] (api :post uri (-> req
-                                                                                           (dissoc :uri)
-                                                                                           (dissoc :params))))
+
+(defmethod execute [:get nil]         [{:keys [uri params]}]
+  (api :get uri params))
+
+(defmethod execute [:post nil]        [{:keys [uri params]}]
+  (api :post uri params))
+
+(defmethod execute [:post :multipart] [{:keys [uri multipart] :as req}]
+  (api :post uri (-> req
+                     (dissoc :uri)
+                     (dissoc :params))))
+
 (defmethod execute [:put nil]         [{:keys [uri params]}]    (put uri params))
 
 (comment
