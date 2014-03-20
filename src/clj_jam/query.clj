@@ -79,7 +79,8 @@
                      (dissoc :uri)
                      (dissoc :params))))
 
-(defmethod execute [:put nil]         [{:keys [uri params]}]    (put uri params))
+(defmethod execute [:put nil]         [{:keys [uri params]}]
+  (put uri params))
 
 (comment
   (api :post "/v1/packages"
