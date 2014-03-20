@@ -51,6 +51,8 @@
        (->> (p/home-page)
             (response "text/html")))
 
+  (route/resources "/")
+
   (ANY "*" []
        (->> "404.html"
             io/resource

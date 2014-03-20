@@ -4,8 +4,12 @@
 (defn- header [title]
   "A simple html header where you can override the title"
   [:head
-      [:title title]
-      (include-css "/css/style.css")])
+   [:title title]
+   (include-css "/css/main.css")
+   (include-css "/css/print.css")
+   (include-css "/css/pygment_trac.css")
+   (include-css "/css/stylesheet.css")
+   (include-css "/css/syntax.css")])
 
 (defn page-with-content [body]
   "The home page"
