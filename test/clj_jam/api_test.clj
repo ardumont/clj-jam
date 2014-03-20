@@ -57,7 +57,7 @@
   "026" 46
   "027" 2
   "028" 16}
- (downloads-by-version '[{:requires [["org" [8 0 7]]
+ (downloads-per-version '[{:requires [["org" [8 0 7]]
                                     ["dash" [1 5 0]]
                                     ["request" [0 2 0]]
                                     ["cl-lib" [0 3 0]]

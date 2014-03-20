@@ -20,7 +20,7 @@
   (def versions ^{:doc "List of current org-trello versions."}
     (-> "org-trello"
         a/versions
-        a/downloads-by-version))
+        a/downloads-per-version))
 
   ;; simulate result from the api namespace
   (def versions-without-computations (into (sorted-map) {"003" 2

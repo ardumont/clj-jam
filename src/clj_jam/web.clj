@@ -1,4 +1,4 @@
-(ns clj-jam.web "A simple api to compute an emacs-lisp package's downloads-by-versions chart on marmalage repository"
+(ns clj-jam.web "A simple api to compute an emacs-lisp package's downloads-per-version chart on marmalage repository"
   (:require [compojure.core :refer [defroutes GET PUT POST DELETE ANY]]
             [compojure.handler :refer [site]]
             [compojure.route :as route]
@@ -35,14 +35,14 @@
   (GET "/packages/:pack" [pack]
        (->> pack
             a/versions
-            a/downloads-by-version
+            a/downloads-per-version
             pr-str
             (response "text/plain")))
 
   (GET "/charts/:pack" [pack :as req]
        (->> pack
             a/versions
-            a/downloads-by-version
+            a/downloads-per-version
             c/barchart-by-versions
             c/gen-chart-png-outputstream
             (response "image/png")))
