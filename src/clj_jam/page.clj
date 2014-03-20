@@ -29,6 +29,6 @@
 
         [:div "Sample"]
         [:ul
-         [:li [:a {:href "/charts/org-trello"} "chart org-trello"]]
-         [:li [:a {:href "/packages/org-trello"} "downloads-per-version org-trello"]]]]]
+         [:li [:a {:href "/charts/org-trello"} "/charts/org-trello"]]
+         [:li [:a {:href "/packages/org-trello"} "/packages/org-trello"]]]]]
       page-with-content))
