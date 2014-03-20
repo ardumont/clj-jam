@@ -6,6 +6,12 @@ pull:
 push:
 	git push origin master
 
+deps:
+	lein deps
+
+tests:
+	lein test
+
 run-dev:
 	lein run -m clj-jam.web 5000
 
@@ -35,6 +41,3 @@ apps:
 
 remote-repl:
 	heroku run lein repl
-
-tests:
-	lein test
