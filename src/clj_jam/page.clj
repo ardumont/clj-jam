@@ -25,10 +25,14 @@
         [:div "For a given emacs package on marmalade, compute downloads per version and charts or simply return computation result."]
         [:ul
          [:li "/charts/:package-name"]
-         [:li "/packages/:package-name"]]
+         [:li "/charts/:package-name/:from-version"]
+         [:li "/packages/:package-name"]
+         [:li "/packages/:package-name/:from-version"]]
 
         [:div "Sample"]
         [:ul
          [:li [:a {:href "/charts/org-trello"} "/charts/org-trello"]]
-         [:li [:a {:href "/packages/org-trello"} "/packages/org-trello"]]]]]
+         [:li [:a {:href "/charts/org-trello/040"} "/charts/org-trello/040"]]
+         [:li [:a {:href "/packages/org-trello"} "/packages/org-trello"]]
+         [:li [:a {:href "/packages/org-trello/040"} "/packages/org-trello/040"]]]]]
       page-with-content))
