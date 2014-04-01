@@ -30,8 +30,9 @@
       q/execute
       -versions))
 
-(defn downloads-per-version [versions]
-  "Given a list of metadata versions (including version and downloads), compute th download ratio per versions."
+(defn downloads-per-version
+  [versions]
+  "Given a list of metadata versions (including version and downloads), compute the download ratio per versions."
   (let [cleanup (comp #(clojure.string/join "" %) :version)]
       (reduce (fn [m pack-version]
                 (assoc m (cleanup pack-version)
