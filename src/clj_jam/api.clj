@@ -40,8 +40,12 @@
               (sorted-map)
               versions)))
 
-
-
+(defn filter-versions
+  "Given a map of versions, and a starting version, filter the versions starting from version-from."
+  [version-from versions]
+  (->> versions
+   (filter (fn [[k _]] (<= 0 (compare k version-from))))
+   (into (sorted-map))))
 
 (comment
   (q/execute (user "ardumont"))

@@ -39,10 +39,27 @@
             pr-str
             (response "text/plain")))
 
-  (GET "/charts/:pack" [pack :as req]
+  (GET "/packages/:pack/:start-version" [pack start-version]
        (->> pack
             a/versions
             a/downloads-per-version
+            (a/filter-versions start-version)
+            pr-str
+            (response "text/plain")))
+
+  (GET "/charts/:pack" [pack]
+       (->> pack
+            a/versions
+            a/downloads-per-version
+            c/barchart-by-versions
+            c/gen-chart-png-outputstream!
+            (response "image/png")))
+
+  (GET "/charts/:pack/:start-version" [pack start-version]
+       (->> pack
+            a/versions
+            a/downloads-per-version
+            (a/filter-versions start-version)
             c/barchart-by-versions
             c/gen-chart-png-outputstream!
             (response "image/png")))
